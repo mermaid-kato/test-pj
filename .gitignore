@@ -33,3 +33,4 @@
 /backend/config/master.key
 
 tmp/
+frontend/node_modules/
