@@ -24,6 +24,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./frontend:/frontend
-    command: sh -c "cd app &&PORT=3001 yarn start"
+    command: sh -c "cd app && npm i styled-components && PORT=3001 yarn start"
     ports:
       - "3000:3001"
