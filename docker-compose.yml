@@ -1,0 +1,29 @@
+services:
+  db:
+    image: mysql:8.0.29
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  backend:
+    build: ./backend/
+    volumes:
+      - ./backend:/backend
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
+
+  front:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/frontend
+    command: sh -c "cd app &&PORT=3001 yarn start"
+    ports:
+      - "3000:3001"
